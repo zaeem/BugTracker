@@ -1,0 +1,32 @@
+<%= form_for @bug, :url => project_bugs_path(@project_id), method: "post", :html => {:multipart => true} do |f| %>
+  <table class="table">
+    <tr>
+      <td>Title</td>
+      <td> <%= f.text_field :title %> </td>
+    </tr>
+    <tr>
+      <td>Descrption</td>
+      <td> <%= f.text_field :description %> </td>
+    </tr>
+    <tr>
+      <td>Select Type</td>
+      <td> <%= f.select :_type, [['Feature', 'feature'],['Bug','bug']] %> </td>
+    </tr>
+    <tr>
+      <td>Select Status</td>
+      <td> <%= f.select :status, [['New', 'new_bug'],['Started','started'],['Completed','completed']] %> </td>
+    </tr>
+    <tr>
+      <td>Deadline</td>
+      <td> <%= f.date_select :deadline %> </td>
+    </tr>
+    <tr>
+      <td>Upload Image</td>
+      <td> <%= f.file_field :image %> </td>
+    </tr>
+    <tr>
+      <td>&nbsp</td>
+      <td><%= f.submit "Save", :class => "btn btn-primary"%></td>
+    </tr>
+  </table>
+<% end %>

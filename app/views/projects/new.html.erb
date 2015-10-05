@@ -1,0 +1,20 @@
+<%= form_for :project, :url => {:action => "create"} do |f| %>
+
+  <div class="form-group">
+        <label>Title of Project</label>
+        <%= f.text_field :title, :class => "form-control"  %>
+    </div>
+    <div class="form-group">
+        <label>Dead line in Months</label>
+        <%= f.text_field :deadline_in_months, :class => "form-control" %>
+    </div>
+    <% if @project.developers.size > 1 %>
+    	<ul>
+			<% @project.developers.each do |p| %>
+				<li>p.name</li>
+			<% end %>
+		</ul>
+	<% end %>
+	<%= f.submit "Save", :class => "btn btn-primary" %>
+  
+<% end %>

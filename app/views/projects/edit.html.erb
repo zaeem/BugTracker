@@ -1,0 +1,169 @@
+
+<%= form_for :project, :url => {:action => "update", :id => @project.id}, method: :put do |f| %>
+    <table class="table table-striped">
+        <tr>
+            <td><label>Title</label></td>
+            <td><%= f.text_field :title, :class => "form-control"  %></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+        <tr>
+            <td><label>Manager</label></td>
+            <td><label><%= @project.manager.name %></label></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+        <tr>
+            <td><label>Deadline in Months</label></td>
+            <td><%= f.text_field :deadline_in_months, :class => "form-control" %></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+        <tr>
+            <td><h2>Developer List</h4></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+        <% if @project.developers.size > 0 %>
+            <% @project.developers.each do |p| %>
+                <tr>
+                    <td><%= p.name %></td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr>
+                <td>No Developer Assigned</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+
+            </tr>
+        <% end %>
+        <% if current_user.manager? %>
+            <tr>
+                <td><%= link_to "Assign Developers" %></td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+            </tr>
+        <% end %>
+        
+        <tr>
+            <td><h4><b>Bugs</b></h4></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+        <% if @project.bugs.size > 0 %>
+            <tr>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Type</td>
+                    <td>Status</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+            <% @project.bugs.each do |bug| %>
+                <tr>
+                    <td><%= bug.title %></td>
+                    <td><%= bug.description %></td>
+                    <td><%= bug._type %></td>
+                    <td><%= bug.status %></td>
+                    <td><%= link_to "Show", project_bug_path(bug.project.id,bug.id) %></td>
+                    <% if current_user.qa? %>
+                        <td><%= link_to "Edit", edit_project_bug_path(bug.creator.id,bug.id) %></td>
+                        <td><%= link_to "Delete", project_bug_path(bug.creator.id,bug.id), method: "delete" %></td>
+                    <% else %>
+                        <td>&nbsp</td>
+                        <td>&nbsp</td>
+                    <% end %>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr>
+                <td>No Bug or Feature added</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+            </tr>
+        <% end %>
+            <% if current_user.qa? %>
+            <tr>
+                <td><%= link_to "Add New Bug", new_project_bug_path %></td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+            </tr>
+        <% end %>
+        <tr>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td><%= f.submit "Update", :class => "btn btn-primary" %></td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+        </tr>
+    </table>
+<% end %>

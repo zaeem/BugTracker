@@ -1,0 +1,35 @@
+
+<h1>Edit Details</h2>
+<%= form_for :bug, :url => {:action => "update", :project_id => @bug.project.id, :id => @bug.id}, method: :put do |f| %>
+	<table class="table table-striped">
+		<tr>
+			<td><label>Title</label></td>
+			<td><%= f.text_field :title, :class => "form-control" %></td>
+		</tr>
+		<tr>
+			<td><label>Description</label></td>
+			<td><%= f.text_field :description, :class => "form-control" %></td>
+		</tr>
+		<tr>
+			<td><label>Type</label></td>
+			<td><label> <%= f.select :_type, [['Feature', 'feature'],['Bug','bug']] %></label></td>
+		</tr>
+		<tr>
+			<td><label>Status</label></td>
+			<td><label> <%= f.select :status, [['New', 'new_bug'],['Started','started'],['Completed','completed']] %></label></td>
+		</tr>
+		<tr>
+			<td><label>Deadline</label></td>
+			<td><label> <%= f.date_select :deadline %></label></td>
+		</tr>
+		<tr>
+			<td><label>Screenshot</label></td>
+			<td><label> <%= image_tag @bug.image_url.to_s %></label></td>
+		</tr>
+		<tr>
+			<td><label>&nbsp</label></td>
+			<td><label> <%= f.submit "Update", :class => "btn btn-primary" %></label></td>
+		</tr>
+
+	</table>
+<% end %>

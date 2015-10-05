@@ -1,0 +1,37 @@
+<h2>DashBoard of projects</h2>
+<div>
+
+	<% if current_user.manager? %>
+		<%= link_to "Create New Project", controller: "projects", action: "new" %>
+	<% end %>
+
+	<% if @projects_of_logged_in_user && @projects_of_logged_in_user.size > 0 %>
+		<table class="table">
+			<tr>
+				<td>Title</td>
+				<td>Developers</td>
+				<td>Deadline</td>
+				<td>&nbsp</td>
+				<td>&nbsp</td>
+				<td>&nbsp</td>
+				<td>&nbsp</td>
+			</tr>
+			<% @projects_of_logged_in_user.each do |project| %>
+				<tr>
+					<td><label><%= project.title %></label></td>
+					<td><label><%= project.developers.size %></label></td>
+					<td><label><%= project.deadline_in_months %></label></td>
+					<td><label><%= link_to "Show", controller: "projects", action: "show", id: project.id %></label></td>
+					<% if current_user.manager? %>
+						<td><label><%= link_to "Edit", edit_project_path(project.id) %></label></td>
+						<td><label><%= link_to "Delete", {:action => 'destroy', :id => project.id}, :confirm => 'Are you sure?', :method => :delete %></label></td>
+						<td><label><%= link_to"Assign Developer", controller: "projects", action: "AssignDeveloper", id: project.id %></label></td>
+					<% else %>
+						<td>&nbsp</td>
+					<% end %>    
+			<% end %>
+		</table>
+	<% else %>
+		<h3>No Projects to show</h3>
+	<% end %>
+</div>

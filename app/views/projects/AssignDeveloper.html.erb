@@ -1,0 +1,45 @@
+
+<h2>we are going to assign developer to <i><u>"<%= @project.title %>"</u></i> </h2>
+<p><%= @developers.size %></p>
+<table class="table table-striped">
+	<tr>
+		<td><label>Title</label></td>
+		<td><label> <%= @project.title %></label></td>
+	</tr>
+	<tr>
+		<td><label>Manager</label></td>
+		<td><label> <%= @project.manager.name %></label></td>
+	</tr>
+	<tr>
+		<td><label>Deadline in Months</label></td>
+		<td><label> <%= @project.deadline_in_months %></label></td>
+	</tr>
+	<tr>
+		<td><h2>Developer List</h4></td>
+	</tr>
+	<% if @project.developers.size > 0 %>
+		<% @project.developers.each do |p| %>
+			<tr>
+				<td><%= p.name %></td>
+			</tr>
+		<% end %>
+	<% else %>
+		<tr>
+			<td>No Developer Assigned</td>
+			<td>&nbsp</td>
+		</tr>
+	<% end %>
+</table>
+
+<%= form_tag('/project/savedeveloper') do %>
+  	<%= hidden_field_tag :project_id, @project_id %> <br />
+ 
+	<%= select_tag "developers",options_from_collection_for_select(@developers, "id", "name", @ids), multiple: true %>
+  
+  	<p>&nbsp</p>
+
+  	<div><%= submit_tag 'Assign', :class => "btn btn-primary" %></div>
+
+<% end %>
+
+

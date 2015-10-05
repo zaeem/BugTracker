@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  is_feature: false
+  is_bug: false
+  is_new: false
+  is_started: false
+  is_completed: false
+
+two:
+  title: MyString
+  description: MyString
+  is_feature: false
+  is_bug: false
+  is_new: false
+  is_started: false
+  is_completed: false
