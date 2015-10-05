@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby "2.2.3p173"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -23,6 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'twitter-bootstrap-rails'
 gem "carrierwave"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -46,3 +48,8 @@ group :development do
   gem 'devise', '~> 3.4.0'
 end
 
+group :development do
+	#herouko server for deployment of your application
+	gem 'rails_12factor'
+	gem 'devise', '~> 3.4.0'
+end
